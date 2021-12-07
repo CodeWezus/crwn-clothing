@@ -10,6 +10,17 @@ export const selectCartItems = createSelector(
     (cart) => cart.cartItems
 )
 
+export const selectCartHidden = createSelector(
+    [selectCart],
+    (cart) => cart.hidden
+);
+
+export const selectCartTotal = createSelector(
+    [selectCartItems],
+    cartItems => cartItems.reduce(
+        (accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity * cartItem.price, 0
+    )
+)
 // Another memoized selector which calls the selectCartItems selector to retrieve the cart items, then uses reduce which takes the quantity from each cart item and creates a new
 // accumulatedQuantity state object which we use to keep track of our total number of cart items.
 export const selectCartItemsCount = createSelector(
