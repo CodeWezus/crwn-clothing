@@ -16,4 +16,22 @@ export const addItemToCart = (cartItems, cartItemsToAdd) => {
 
     // Returns a new array with all existing items, with an added object of our cartItem with a default quantity of 1.
     return [...cartItems, { ...cartItemsToAdd, quantity: 1 }]
+};
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+    const existingCartItem = cartItems.find(
+        cartItem => cartItem.id === cartItemToRemove.id
+    );
+
+    // If the quantity of the item to remove is 1, we want to return a new cartItems object with all the items excluding the removed one.
+    if (existingCartItem.quantity === 1){
+        return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id)
+    }
+
+    // If the quantity of the item to remove is >1, find that item and decrease it' quantity by 1.
+    return cartItems.map(cartItem => 
+        cartItem.id === cartItemToRemove.id ? 
+        { ...cartItem, quantity: cartItem.quantity - 1}
+        : cartItem
+    );
 }
