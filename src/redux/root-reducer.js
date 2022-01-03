@@ -5,6 +5,8 @@ import storage from 'redux-persist/lib/storage';
 
 import userReducer from './user/user-reducer';
 import cartReducer from './cart/cart-reducer';
+import directoryReducer from './directory/directory-reducer';
+import shopReducer from './shop/shop-reducer';
 
 // The Root Reducer is a reducer that combines the data from all the reducers (states) in our application. This allows us to create a single consolidated state object for our application.
 // Essentailly we are making the state of out application more modular.
@@ -18,7 +20,9 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
         user: userReducer,
-        cart: cartReducer
+        cart: cartReducer,
+        directory: directoryReducer,
+        shop: shopReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);
